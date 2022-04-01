@@ -18,16 +18,15 @@ void    List<T>::pushback(const T &value) {
     }
     else {
 
-        Node<T> tmp;
+        std::shared_ptr<Node<T>> tmp = std::make_shared<Node<T>> ();
 
-        tmp = (*_List);
-        while (tmp.next != nullptr)
-            tmp = (*tmp.next);
-        tmp.data = std::make_shared<T> (value);
-        tmp.next = std::make_shared<Node<T>> ();
-        tmp.next->next = nullptr;
-        tmp.next->data = nullptr;
-        (*_List) = tmp;
+        tmp = _List;
+        while (tmp->next != nullptr)
+            tmp = tmp->next;
+        tmp->data = std::make_shared<T> (value);
+        tmp->next = std::make_shared<Node<T>> ();
+        tmp->next->next = nullptr;
+        tmp->next->data = nullptr;
     }
 }
 
@@ -49,8 +48,6 @@ int main(void) {
     List<int> lst;
 
     lst.pushback(10);
-    lst.print();
-
     lst.pushback(20);
     lst.pushback(30);
     lst.print();
