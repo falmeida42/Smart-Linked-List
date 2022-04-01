@@ -9,6 +9,8 @@ struct Node
 {
     std::shared_ptr<T> data;
     std::shared_ptr<Node<T>> next;
+    std::weak_ptr<Node<T>> prev;
+    
 };
 
 
@@ -16,7 +18,6 @@ template <class T>
 class List
 {
     private:
-        std::shared_ptr<Node<T>> _List;
         std::shared_ptr<Node<T>> head;
         std::shared_ptr<Node<T>> tail;
 
@@ -32,7 +33,7 @@ class List
         void    push_front( const T &value );
         void    pop_front(void);
         void    print(void) const;
-
+        void    reverseprint(void) const;
 };
 
 
