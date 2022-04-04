@@ -42,12 +42,13 @@ bool    List<T>::empty(void) const {
 template <class T>
 void    List<T>::push_back(const T &value) {
 
-    if (this->size == 0) {
+    if (size == 0) {
         head = std::make_shared<Node<T>> ();
         tail = head;
         head->data = std::make_shared<T> (value);
         head->next = tail;
         tail->prev = head;
+        tail->next = nullptr;
     }
     else {
         std::shared_ptr<Node<T>> node = std::make_shared<Node<T>> ();
@@ -55,7 +56,6 @@ void    List<T>::push_back(const T &value) {
         node->prev = tail;
         tail->next = node;
         tail = node;
-        //std::cout << "tail prev: " << (*tail->prev.lock()->data) << std::endl;
     }
     size++;
 }
@@ -77,12 +77,13 @@ void    List<T>::pop_back(void) {
 template <class T>
 void List<T>::push_front( const T& value ) {
 
-    if (head == nullptr) {
+    if (size == 0) {
         head = std::make_shared<Node<T>> ();
+        tail = head;
         head->data = std::make_shared<T> (value);
-        head->next = std::make_shared<Node<T>> ();
-        head->next = nullptr;
-        head->next->data = nullptr;
+        head->next = tail;
+        tail->prev = head;
+        tail->next = nullptr;
     }
     else {
         std::shared_ptr<Node<T>> tmp = std::make_shared<Node<T>> ();
@@ -128,17 +129,9 @@ int main(void) {
 
     List<int> lst;
 
+    
     lst.push_back(1);
-    lst.push_back(2);
-    lst.push_back(3);
-    lst.push_back(4);
-    lst.push_back(5);
-    lst.push_back(6);
-    lst.push_back(7);
-    lst.push_front(8);
-
+    
     lst.pop_back();
-
-
     lst.print();
 }
