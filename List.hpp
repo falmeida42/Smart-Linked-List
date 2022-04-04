@@ -20,12 +20,12 @@ class List
     private:
         std::shared_ptr<Node<T>> head;
         std::shared_ptr<Node<T>> tail;
-        size_t                   size = 0;
+        
     public:
         List();
         //CAPACITY
         bool    empty(void) const;
-        //size_t  size(void) const;
+        size_t  size(void) const;
 
         //MODIFIERS
         size_t  get_size(void) {return (size);};
