@@ -8,29 +8,32 @@ List<T>::List() {
 
 //CAPACITY
 
-// template <class T>
-// bool    List<T>::empty(void) const {
+template <class T>
+bool    List<T>::empty(void) const {
 
-//     if (_List == nullptr)
-//         return (true);
-//     return (false);
-// }
+    if (this->head == nullptr)
+        return (true);
+    return (false);
+}
 
-// template <class T>
-// size_t  List<T>::size(void) const {
+template <class T>
+size_t  List<T>::size(void) const {
 
-//     Node<T> tmp;
-//     size_t  size;
+    Node<T> tmp;
+    size_t  size;
 
-//     tmp = (*_List);
-//     size = 0;
-//     while (tmp.next != nullptr) {
-//         tmp = (*tmp.next);
-//         size++;
-//     }
+    if (empty())
+        return (0);
+    tmp = (*head);
+    size = 0;
 
-//     return (size);
-// }
+    while (tmp.next != nullptr) {
+        tmp = (*tmp.next);
+        size++;
+    }
+
+    return (size);
+}
 
 //CAPACITY
 
@@ -39,28 +42,34 @@ List<T>::List() {
 template <class T>
 void    List<T>::push_back(const T &value) {
 
-    if (head == nullptr)
-    {
-    head = std::make_shared<Node<T>> ();
-    tail = std::make_shared<Node<T>> ();
-    head->data = std::make_shared<T> (value);
-    head->next = std::make_shared<Node<T>> ();
-    head->next = tail;
-    tail->prev = head;
-    tail->next = nullptr;
+    if (size() == 0) {
+        head = std::make_shared<Node<T>> ();
+        tail = std::make_shared<Node<T>> ();
+        head->data = std::make_shared<T> (value);
+        head->next = std::make_shared<Node<T>> ();
+        head->next = tail;
+        tail = head;
     }
     else {
-        tail->data = std::make_shared<T> (value);
         tail->next = std::make_shared<Node<T>> ();
-        tail->next->prev = tail;
+        tail->next->data = std::make_shared<T> (value);
         tail = tail->next;
         tail->next = nullptr;
     }
+   
 }
 
 template <class T>
 void    List<T>::pop_back(void) {
-
+    
+    if (empty())
+        return ;
+    else if (size() == 1)
+        head = nullptr;
+    else {
+        std::cout << "####" << std::endl;
+        std::cout << (*tail->data) << std::endl;
+    }
 }
 
 template <class T>
@@ -99,6 +108,8 @@ void    List<T>::print(void) const {
 
     Node<T> tmp;
 
+    if (empty())
+        return ;
     tmp = (*head);
     std::cout << "------" << std::endl;
     while (tmp.next != nullptr) {
@@ -126,13 +137,18 @@ int main(void) {
 
     List<int> lst;
 
-    lst.push_back(12);
-    lst.push_back(12);
-    lst.pop_front();
-    lst.pop_front();
+    lst.push_back(1);
+    lst.push_back(1);
+    lst.push_back(1);
+    lst.push_back(1);
+    lst.push_back(1);
+    //lst.push_back(1);
 
 
+    //lst.pop_back();
 
-    //lst.reverseprint();
+    //std::cout << lst.size() << std::endl;
+    
+   // lst.reverseprint();
     lst.print();
 }
