@@ -24,6 +24,11 @@ class List
 
     public:
         List();
+
+        //ELEMENT ACESS
+        T&      front(void);
+        T&      back(void);
+
         //CAPACITY
         bool    empty(void) const;
         size_t  size(void) const;

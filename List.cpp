@@ -6,8 +6,20 @@ List<T>::List() {
     tail = nullptr;
 }
 
-//CAPACITY
+//ACESS ELEMENT
+template <class T>
+T&   List<T>::front(void) {
+    return (*head->data);
+}
 
+template <class T>
+T&   List<T>::back(void) {
+    return (*tail->data);
+}
+
+
+
+//CAPACITY
 template <class T>
 bool    List<T>::empty(void) const {
 
@@ -142,12 +154,27 @@ void    List<T>::print(void) const {
 int main(void) {
 
     List<int> lst;
-
     
+    lst.push_back(133);
     lst.push_back(1);
+<<<<<<< HEAD
     lst.push_back(1);
     lst.clear();
     
     //lst.pop_back();
+=======
+    lst.push_back(2);
+    lst.push_back(3);
+    lst.pop_back();
+    lst.push_back(4);
+    lst.push_back(5);
+    lst.push_back(6);
+    lst.push_back(1212121);
+    lst.push_front(42);
+>>>>>>> f7813dc7ded1c7c429589004aca8f1eb217fe611
     lst.print();
+
+    std::cout << "List Front: "<< lst.front() << std::endl;
+    std::cout << "List Back: " << lst.back() << std::endl;
+
 }
