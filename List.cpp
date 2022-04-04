@@ -52,11 +52,11 @@ void    List<T>::push_back(const T &value) {
     else {
         std::shared_ptr<Node<T>> node = std::make_shared<Node<T>> ();
         node->data = std::make_shared<T>(value);
-        node->prev = tail->prev;
+        node->prev = tail;
         tail->next = node;
         tail = node;
+        //std::cout << "tail prev: " << (*tail->prev.lock()->data) << std::endl;
     }
-    
     size++;
 }
 
@@ -68,7 +68,8 @@ void    List<T>::pop_back(void) {
     else if (size == 1)
         head = nullptr;
     else {
-        std::cout << "tail prev: " << (*tail->prev.lock()->data) << std::endl;
+        tail = tail->prev.lock();
+        tail->next = nullptr;
     }
     size--;
 }
@@ -86,6 +87,7 @@ void List<T>::push_front( const T& value ) {
     else {
         std::shared_ptr<Node<T>> tmp = std::make_shared<Node<T>> ();
 
+        head->prev = tmp;
         tmp->data = std::make_shared<T> (value);
         tmp->next = std::make_shared<Node<T>> ();
         tmp->next = head;
@@ -136,6 +138,7 @@ int main(void) {
     lst.push_front(8);
 
     lst.pop_back();
+
 
     lst.print();
 }
