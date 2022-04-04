@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <memory>
+# include <bits/stdc++.h>
 
 template <class T>
 struct Node
@@ -20,12 +21,13 @@ class List
     private:
         std::shared_ptr<Node<T>> head;
         std::shared_ptr<Node<T>> tail;
-        
+
     public:
         List();
         //CAPACITY
         bool    empty(void) const;
         size_t  size(void) const;
+        void clear();
 
         //MODIFIERS
         size_t  get_size(void) {return (size);};

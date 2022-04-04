@@ -35,6 +35,23 @@ size_t  List<T>::size(void) const {
     return (size);
 }
 
+template <class T>
+void List<T>::clear()
+{
+    std::shared_ptr<Node<T>> current = std::make_shared<Node<T>> ();
+    current = head;
+    std::shared_ptr<Node<T>> next = NULL;
+ 
+    while (current != NULL)
+    {
+        next = current->next;
+        pop_back();
+        current = next;
+    }
+    head = NULL;
+}
+
+
 //CAPACITY
 
 
@@ -64,7 +81,7 @@ void    List<T>::pop_back(void) {
     
     if (empty())
         return ;
-    else if (size == 1)
+    else if (size() == 1)
         head = nullptr;
     else {
         tail = tail->prev.lock();
@@ -129,6 +146,7 @@ int main(void) {
     
     lst.push_back(1);
     lst.push_back(1);
+    lst.clear();
     
     //lst.pop_back();
     lst.print();
