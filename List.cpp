@@ -58,48 +58,39 @@ void    List<T>::push_back(const T &value) {
     }
 }
 
-// template <class T>
-// void    List<T>::pop_back(void) {
+template <class T>
+void    List<T>::pop_back(void) {
 
-//     std::shared_ptr<Node<T>> tmp = std::make_shared<Node<T>> ();
+}
 
-//     tmp = _List;
-//     while (tmp->next->next != nullptr)
-//         tmp = tmp->next;
-//     tmp->next->data = nullptr;
-//     tmp->next = nullptr;
-// }
+template <class T>
+void List<T>::push_front( const T& value ) {
 
-// template <class T>
-// void List<T>::push_front( const T& value ) {
+    if (head == nullptr) {
+        head = std::make_shared<Node<T>> ();
+        head->data = std::make_shared<T> (value);
+        head->next = std::make_shared<Node<T>> ();
+        head->next = nullptr;
+        head->next->data = nullptr;
+    }
+    else {
+        std::shared_ptr<Node<T>> tmp = std::make_shared<Node<T>> ();
 
-//     if (_List == nullptr) {
-//         _List = std::make_shared<Node<T>> ();
-//         _List->data = std::make_shared<T> (value);
-//         _List->next = std::make_shared<Node<T>> ();
-//         _List->next->next = nullptr;
-//         _List->next->data = nullptr;
-//     }
-//     else {
-//         std::shared_ptr<Node<T>> node = std::make_shared<Node<T>> ();
-//         node->data = std::make_shared<T> (value);
-//         node->next = std::make_shared<Node<T>> ();
-//         node->next = _List;
-//         _List = node;
-//     }
-// }
+        tmp->data = std::make_shared<T> (value);
+        tmp->next = std::make_shared<Node<T>> ();
+        tmp->next = head;
+        head = tmp;
+    }
+}
 
-// template <class T>
-// void    List<T>::pop_front(void) {
+template <class T>
+void    List<T>::pop_front(void) {
 
-//     std::shared_ptr<Node<T>> tmp = std::make_shared<Node<T>> ();
-
-//     tmp = _List;
-    
-//     _List = _List->next;
-//     tmp->data = nullptr;
-//     tmp = nullptr;
-// }
+    if (head->next == nullptr)
+        head = nullptr;
+    else
+        head = head->next;
+}
 
 //MODIFIERS
 
@@ -135,15 +126,13 @@ int main(void) {
 
     List<int> lst;
 
-    lst.push_back(11);
     lst.push_back(12);
-    lst.push_back(13);
-    lst.push_back(14);
-    lst.push_back(15);
-    lst.push_back(16);
-    lst.push_back(17);
-    lst.push_back(18);
-  
+    lst.push_back(12);
+    lst.pop_front();
+    lst.pop_front();
+
+
+
+    //lst.reverseprint();
     lst.print();
-    lst.reverseprint();
 }
